@@ -1,11 +1,13 @@
 <template>
     <div class="container">
 
-        <input  type="text" placeholder="search" @focus="focus">
+        <input  type="text" placeholder="search" @focus="focus" @blur="blur" :value="inputValue">
         <div class="options-container">
+            <transition name="rolldown">
             <ul v-if="focused" class="options-col">
                 <li v-for="city in cities" class="options-row">{{ city.city }}</li>
             </ul>
+            </transition>
         </div>
 
     </div>
@@ -14,11 +16,24 @@
 <script setup>
 
 import citiesData from '@/data/cities.js'
-
 import { ref } from 'vue'
 
 const cities = ref(citiesData)
-const focused = false
+let focused = ref(false)
+
+let inputValue = ref("")
+
+const focus = (e) => {
+    focused.value = true
+    
+}
+
+const blur = () => {
+    focused.value = false
+}
+
+
+
 
 </script>
 
@@ -51,31 +66,31 @@ input {
 input:focus {
     background: #fff;
     border-radius: 15px 15px 0 0;
-
-    border-color: pink;
+    outline: none;
+    transition: all .3s linear;
 }
 
 .options-container {
     overflow: hidden;
     border-radius: 0 0 15px 15px;
-   
+    background: #fafafa;
 }
 
 .options-col {
     border: 1px solid #cccccc;
+    border-top: 0;
     border-radius: 0 0 15px 15px;
-    max-height: 30rem;
+    overflow: none;
 
+    max-height: 20rem;
 
     list-style-type: none;
-    overflow: auto;
+    
     margin: 0;
     padding: 0;
 
     font-size: 1.4rem;
     color: #777;
-
-    background: #fafafa
 }
 
 .options-row {
@@ -85,5 +100,30 @@ input:focus {
 .options-row:hover {
     background: #ededed;
 }
+
+
+.rolldown-enter-from,
+.rolldown-leave-to {
+    max-height: 0;
+    border: 0px solid #fff;
+    border-top: 0px solid #cccccc;
+    background: #fff;
+}
+.rolldown-enter-to
+.rolldown-leave-from {
+    max-height: 100%;
+    
+    border: 1px solid #cccccc;
+    border-top: 0;
+    background: #fafafa
+}
+
+.rolldown-enter-active,
+.rolldown-leave-active {
+    transition: all .3s linear;
+}
+
+
+
 
 </style>

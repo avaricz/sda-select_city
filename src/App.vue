@@ -1,7 +1,7 @@
 <template>
 
     <div class="search">
-        <AInput class="adam"/>
+        <AInput/>
     </div>
 
 </template>
@@ -19,7 +19,6 @@ import AInput from "./components/AInput.vue";
 <style>
 
 .search {
-    margin-top: 5rem;
     position: relative;
     left: 50%;
     translate: -50%;
