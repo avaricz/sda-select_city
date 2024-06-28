@@ -14,7 +14,7 @@
             <ul v-if="focused" class="options-col">
                 <li v-for="(city, index) in filteredCities" 
                 class="options-row"
-                :class="{'selected': false}" 
+                :class="{'selected': selected(index)}" 
                 @click="selectItemByMouse(index)" 
                 >{{ city }}</li>
             </ul>
@@ -86,14 +86,24 @@
             selectedItem.value = -1
     }) 
 
+    const selected = (index) => {
+        if(selectedItem.value === index) {
+            return true
+        }
+    }
+
    
     const keydown = ( e) => {
-        if(e.key === "ArrowDown" && selectedItem.value < filteredCities.value.length -1) {
+        if(e.key === "ArrowDown") {
+            if(selectedItem.value === filteredCities.value.length -1){
+                selectedItem.value = -1
+                
+            }
             selectedItem.value += 1
             console.log(filteredCities.value[selectedItem.value])
         }
         if(e.key === "ArrowUp") {
-            if(selectedItem.value === -1) {
+            if(selectedItem.value <= 0 ) {
                 selectedItem.value = filteredCities.value.length
             }
             selectedItem.value -= 1
@@ -181,7 +191,7 @@ input:focus {
     background: #ededed;
 }
 .selected {
-    background: red;
+    background: #ededed;
 }
 
 
