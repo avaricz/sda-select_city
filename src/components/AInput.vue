@@ -150,7 +150,7 @@ input:focus {
 
 
 .options-container {
-    overflow: none;
+    overflow: hidden;
     border-radius: 0 0 15px 15px;
     background: #fafafa;
 }
