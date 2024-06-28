@@ -22,7 +22,7 @@ import AInput from "./components/AInput.vue";
     position: relative;
     left: 50%;
     translate: -50%;
-    max-width: 50%;
+    max-width: 450px;
 }
 
 
